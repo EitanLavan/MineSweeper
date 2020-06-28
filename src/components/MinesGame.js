@@ -32,8 +32,8 @@ export function MinesGame(props) {
                 if (col == 0) {
                     helpers.ExpoesAllRelevantCells(Number(props.height), Number(props.width), cellIndex);
                 }
+                checkGameStatus(cellIndex);
             }
-            checkGameStatus(cellIndex);
         }
     };
 

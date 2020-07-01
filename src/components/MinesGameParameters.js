@@ -7,7 +7,7 @@ const MinesGameParameters = (props) => {
                 <tbody>
                     <tr>
                         <td>
-                            <text>Height:</text>
+                            Height:
                         </td>
                         <td>
                             <input type="text" value={props.height} onChange={event => props.setHeight(event.target.value)} />
@@ -15,7 +15,7 @@ const MinesGameParameters = (props) => {
                     </tr>
                     <tr>
                         <td>
-                            <text>Width:</text>
+                            Width:
                         </td>
                         <td>
                             <input type="text" value={props.width} onChange={event => props.setWidth(event.target.value)} />
@@ -23,7 +23,7 @@ const MinesGameParameters = (props) => {
                     </tr>
                     <tr>
                         <td>
-                            <text>Mines:</text>
+                            Mines:
                         </td>
                         <td>
                             <input type="text" value={props.mines} onChange={event => props.setMines(Number(event.target.value))} />

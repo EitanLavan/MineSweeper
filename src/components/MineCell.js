@@ -1,17 +1,16 @@
 import React from "react";
 
 const MineCell = (props) => {
-    const [val, setVal] = React.useState(props.val);
+    const [val, setVal] = React.useState("");
 
     return (
-        <td key={props.col} >
+        <td>
             <button
                 className="mineCell"
                 id={props.cellIndex}
                 key={props.cellIndex}
-                row={props.row}
-                column={props.col}
-                cellIndex={props.cellIndex}
+                col={props.col}
+                cellindex={props.cellIndex}
 
                 onClick={(event) => {
                     if (props.gameStatus === "active") {
@@ -36,7 +35,7 @@ const MineCell = (props) => {
                             if (val !== "🚩") {
                                 if ({ val } !== props.col) {
                                     setVal(props.col);
-                                    props.onClick(props.row, props.col, props.val, props.cellIndex, props.isExposed, props.subItems);
+                                    props.onClick(props.col, { val }, props.cellIndex);
                                 }
                             }
                         }
@@ -45,8 +44,8 @@ const MineCell = (props) => {
                 }
             >
                 {props.gameStatus === "active" && !props.superman
-                    ? (<text>{val}</text>)
-                    : (<text>{props.col}</text>)
+                    ? (<div>{val}</div>)
+                    : (<div>{props.col}</div>)
                 }
             </button>
         </td>

@@ -3,12 +3,12 @@ import MineBoard from './MineBoard'
 import PlayAgain from './PlayAgain'
 import helpers from '../helpers'
 
-export function MinesGame(props) {
+function MinesGame(props) {
     const [flagsLeft, setFlagsLeft] = React.useState(props.mines);
     const [mineBoard, setmineBoard] = React.useState(helpers.CreateMap(props.height, props.width, props.mines));
     const [gameStatus, setGameStatus] = React.useState("active");
     const [superman, setSuperman] = React.useState(false);
-
+    const [boardId, setBoardId] = React.useState(1);
     const onsupermanCheck = () => {
         setSuperman(true);
         setGameStatus('lost');
@@ -19,10 +19,11 @@ export function MinesGame(props) {
         setFlagsLeft(props.mines);
         setmineBoard(helpers.CreateMap(props.height, props.width, props.mines));
         setSuperman(false);
+        setBoardId(boardId + 1);
         props.startNewGame()
     };
 
-    const onMineCellClick = (row, col, val, cellIndex, isExposed, subItems) => {
+    const onMineCellClick = (col, val, cellIndex) => {
         if (val !== col) {
             val = col;
             if (val === '☀') {
@@ -42,7 +43,7 @@ export function MinesGame(props) {
         for (let cellIndex = 1; cellIndex <= props.height * props.width; cellIndex++) {
             if (exposedCellIndex !== cellIndex) {
                 let y = document.getElementById(cellIndex);
-                if (y.innerHTML == '<text></text>') {
+                if (y.innerHTML == '<div></div>') {
                     isWin = false;
                     break;
                 }
@@ -61,26 +62,22 @@ export function MinesGame(props) {
         }
     }
 
+
     return (
         <>
             <div>
-                <MineBoard mineBoard={mineBoard} gameStatus={gameStatus} flagsLeft={flagsLeft} superman={superman} onClick={onMineCellClick} OnFlagsLeftChange={OnFlagsLeftChange} />
+                <div>Flags left: {flagsLeft}</div>
             </div>
             <div>
-                <text>Flags left: {flagsLeft}</text>
-            </div>
-            <div>
-
                 <button onClick={onsupermanCheck}>Superman</button>
             </div>
             <div >
-                {gameStatus !== 'active' || superman ? (
-                    <PlayAgain onClick={resetGame} gameStatus={gameStatus} />
-                ) : (
-                        <text >Game is active!!!</text>
-                    )}
+                <PlayAgain onClick={resetGame} gameStatus={gameStatus} />
             </div>
-        </>
+            <div>
+                <MineBoard mineBoard={mineBoard} gameStatus={gameStatus} flagsLeft={flagsLeft}
+                    superman={superman} onClick={onMineCellClick} OnFlagsLeftChange={OnFlagsLeftChange} />
+            </div>        </>
     );
 }
 

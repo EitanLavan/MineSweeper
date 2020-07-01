@@ -3,21 +3,23 @@ import MineCell from "./MineCell"
 
 export function MineBoard(props) {
     let cellIndex = 0;
+    let rowlIndex = 0;
     return (
         <>
             <div>
                 <table className="board" >
                     <tbody>
                         {props.mineBoard.map((row) => {
+                            rowlIndex++;
                             return (
-                                <tr key={row} className="mapRow">
-                                    {row.map((col, subItems) => {
+                                <tr className="mapRow" key={rowlIndex}>
+                                    {row.map((col) => {
                                         cellIndex++;
                                         return (
-                                            <MineCell col={col} row={row} val=""
+                                            <MineCell
+                                                key={cellIndex}
+                                                col={col}
                                                 cellIndex={cellIndex}
-                                                isExposed='false'
-                                                subItems={subItems}
                                                 gameStatus={props.gameStatus}
                                                 superman={props.superman}
                                                 flagsLeft={props.flagsLeft}

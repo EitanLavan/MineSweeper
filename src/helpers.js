@@ -16,7 +16,7 @@ const helpers = {
             while (!IsFoundPlace) {
                 let mineHeightIndex = Math.floor(Math.random() * (height))
                 let mineWidthIndex = Math.floor(Math.random() * (width))
-                if (map[mineHeightIndex][mineWidthIndex] !== '☀' && mineHeightIndex <= height && mineWidthIndex <= width) {
+                if (map[mineHeightIndex][mineWidthIndex] != '☀' && mineHeightIndex <= height && mineWidthIndex <= width) {
                     map[mineHeightIndex][mineWidthIndex] = '☀';
 
                     if (mineHeightIndex > 0 && map[mineHeightIndex - 1][mineWidthIndex] !== '☀')
@@ -92,10 +92,10 @@ const helpers = {
         let cellElement = document.getElementById(cellIndex);
         try {
             if (cellElement != null) {
-                let cellElementData = cellElement.attributes[3].value;
+                let cellElementData = cellElement.attributes[2].value;
                 if (cellElementData !== '☀') {
-                    if (cellElement.innerHTML == '<text></text>') {
-                        cellElement.innerHTML = '<text>' + cellElementData + '</text>';
+                    if (cellElement.innerHTML == '<div></div>') {
+                        cellElement.innerHTML = '<div>' + cellElementData + '</div>';
                         if (cellElementData == '0') {
                             neighbors.push(cellIndex)
                         }
